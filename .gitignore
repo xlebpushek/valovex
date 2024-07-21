@@ -1,0 +1,23 @@
+# IDE
+.idea
+.vscode
+
+# Temporary
+.tmp
+
+# Design
+design
+
+# Package manager
+pnpm-lock.yaml
+
+# Dependencies
+node_modules
+
+# Environtment variables
+.env.local
+.env.production.local
+.env.development.local
+
+# NextJS
+.next
