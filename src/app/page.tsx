@@ -1,14 +1,40 @@
 'use client'
 
+import { createClient } from '@/shared/lib/api/supabase/client'
 import clsx from 'clsx'
 import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
+import { navigate } from './actions'
 import { tungsten } from './fonts'
 
 export default function RootPage() {
-  const [isEnterICode, setEnterICode] = useState(false)
+  const [isEnterICode, setIsEnterICode] = useState(false)
+  const [iCode, setICode] = useState('')
 
-  const createLobby = () => {}
+  const [isLoading, setIsLoading] = useState(false)
+
+  const supabase = createClient()
+
+  const createLobby = async () => {
+    setIsLoading(true)
+
+    setICode('123')
+
+    await supabase
+      .from('Lobbies')
+      .insert({ invite_code: iCode })
+      .then(async ({ error }) => {
+        setIsLoading(false)
+
+        if (error) console.error(error)
+
+        navigate('/lobbies/' + iCode)
+      })
+  }
+
+  const connectToLobby = () => {
+    navigate('/lobbies/' + iCode)
+  }
 
   return (
     <>
@@ -32,7 +58,7 @@ export default function RootPage() {
           <div className="border border-white p-0.5">
             <button
               className="px-8 py-2 font-medium transition-colors duration-500 hover:bg-rose-700"
-              onClick={() => setEnterICode(true)}
+              onClick={() => setIsEnterICode(true)}
             >
               Connect
             </button>
@@ -40,15 +66,25 @@ export default function RootPage() {
         </div>
       </section>
       {isEnterICode && (
-        <button className="absolute h-full w-full bg-black/80 backdrop-blur-sm" onClick={() => setEnterICode(false)} />
+        <button
+          className="absolute h-full w-full bg-black/80 backdrop-blur-sm"
+          onClick={() => setIsEnterICode(false)}
+        />
       )}
       {isEnterICode && (
         <div className="absolute z-10 flex items-center justify-center gap-x-3">
           <div className="group flex flex-col">
-            <input className="bg-transparent px-2 py-1 text-lg" placeholder="Enter invite code" />
+            <input
+              className="bg-transparent px-2 py-1 text-lg"
+              placeholder="Enter invite code"
+              value={iCode}
+              onChange={(event) => setICode(event.target.value)}
+            />
             <span className="h-px w-0 bg-rose-700 transition-all duration-500 group-hover:w-full" />
           </div>
-          <ChevronRight className="transition-colors duration-500 hover:text-rose-700" />
+          <button onClick={connectToLobby}>
+            <ChevronRight className="transition-colors duration-500 hover:text-rose-700" />
+          </button>
         </div>
       )}
     </>
