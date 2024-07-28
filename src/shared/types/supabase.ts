@@ -11,16 +11,46 @@ export type Database = {
     Tables: {
       Lobbies: {
         Row: {
+          attachers: string[]
+          attachers_limit: number
+          banned_agents: string[]
+          banned_maps: string[]
           created_at: string
+          creator: string
+          defenders: string[]
+          defenders_limit: number
+          game_mode: string
           invite_code: string
+          observers: string[]
+          voting_time: number
         }
         Insert: {
+          attachers?: string[]
+          attachers_limit?: number
+          banned_agents?: string[]
+          banned_maps?: string[]
           created_at?: string
+          creator: string
+          defenders?: string[]
+          defenders_limit?: number
+          game_mode?: string
           invite_code: string
+          observers?: string[]
+          voting_time?: number
         }
         Update: {
+          attachers?: string[]
+          attachers_limit?: number
+          banned_agents?: string[]
+          banned_maps?: string[]
           created_at?: string
+          creator?: string
+          defenders?: string[]
+          defenders_limit?: number
+          game_mode?: string
           invite_code?: string
+          observers?: string[]
+          voting_time?: number
         }
         Relationships: []
       }
@@ -29,7 +59,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      append_to_array: {
+        Args: {
+          table_name: string
+          column_name: string
+          value: string
+          condition_column: string
+          condition_value: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

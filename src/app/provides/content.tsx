@@ -9,7 +9,7 @@ interface ContentProviderProps {
 export function ContentProvider({ children }: ContentProviderProps) {
   return (
     <>
-      <main className="flex min-h-full w-full flex-col items-center justify-center">{children}</main>
+      <main className="flex h-full w-full flex-col items-center justify-center">{children}</main>
     </>
   )
 }

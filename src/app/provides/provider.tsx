@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from 'next-themes'
 import { ReactNode } from 'react'
+import { AuthProvider } from './auth'
 import { ContentProvider } from './content'
 
 interface RootProviderProps {
@@ -11,7 +12,9 @@ interface RootProviderProps {
 export function RootProvider({ children }: RootProviderProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <ContentProvider>{children}</ContentProvider>
+      <AuthProvider>
+        <ContentProvider>{children}</ContentProvider>
+      </AuthProvider>
     </ThemeProvider>
   )
 }

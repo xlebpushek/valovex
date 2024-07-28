@@ -1,0 +1,31 @@
+.puff-loader-animation-first-circle {
+  animation-fill-mode: both;
+  animation: puff-loader-first-circle-keyframes infinite cubic-bezier(0.165, 0.84, 0.44, 1),
+              puff-loader-second-circle-keyframes infinite cubic-bezier(0.3, 0.61, 0.355, 1);
+  animation-delay: -1s;
+}
+
+.puff-loader-animation-second-circle {
+  animation-fill-mode: both;
+  animation: puff-loader-first-circle-keyframes infinite cubic-bezier(0.165, 0.84, 0.44, 1),
+              puff-loader-second-circle-keyframes infinite cubic-bezier(0.3, 0.61, 0.355, 1);
+  animation-delay: 0s;
+}
+
+@keyframes puff-loader-first-circle-keyframes {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes puff-loader-second-circle-keyframes {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
