@@ -28,4 +28,3 @@ export function PlayerReadyEntity({ isReady, borderColor, shadowColor }: PlayerR
     </div>
   )
 }
-// 3b7979

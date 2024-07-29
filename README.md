@@ -1,2 +1,2 @@
 # valovex
-A web application for banning cards and characters in custom matches for the VALORANT game
+A web application for banning maps and agents in custom matches for the VALORANT game

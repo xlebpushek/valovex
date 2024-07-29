@@ -23,13 +23,15 @@ export function Select({ options, value, onChange, disabled, classNames }: Selec
     setIsOpen(false)
   }
 
+  const label = options.find((option) => option.value === value)?.label
+
   return (
     <div className={clsx('relative', classNames)}>
       <button
         onClick={() => !disabled && setIsOpen(!isOpen)}
         className="custom-scrollbar w-full border border-white/10 py-2 text-center font-bold backdrop-blur-sm transition-colors duration-500"
       >
-        {value}
+        {label}
       </button>
       <div
         className={`absolute left-0 right-0 top-full z-10 mt-1 overflow-hidden duration-500 ease-in-out ${isOpen ? 'max-h-96' : 'max-h-0'}`}

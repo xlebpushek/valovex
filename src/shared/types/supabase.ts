@@ -9,48 +9,60 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      Lobbies: {
+      lobbies: {
         Row: {
           attachers: string[]
           attachers_limit: number
+          attachers_ready: string[]
           banned_agents: string[]
           banned_maps: string[]
           created_at: string
           creator: string
           defenders: string[]
           defenders_limit: number
-          game_mode: string
+          defenders_ready: string[]
+          game_mode: Database["public"]["Enums"]["game_mods"]
           invite_code: string
           observers: string[]
-          voting_time: number
+          votes: Json
+          voting_side: Database["public"]["Enums"]["voting_sides"]
+          voting_time: Database["public"]["Enums"]["voting_times"]
         }
         Insert: {
           attachers?: string[]
           attachers_limit?: number
+          attachers_ready?: string[]
           banned_agents?: string[]
           banned_maps?: string[]
           created_at?: string
           creator: string
           defenders?: string[]
           defenders_limit?: number
-          game_mode?: string
+          defenders_ready?: string[]
+          game_mode?: Database["public"]["Enums"]["game_mods"]
           invite_code: string
           observers?: string[]
-          voting_time?: number
+          votes?: Json
+          voting_side: Database["public"]["Enums"]["voting_sides"]
+          voting_time?: Database["public"]["Enums"]["voting_times"]
         }
         Update: {
           attachers?: string[]
           attachers_limit?: number
+          attachers_ready?: string[]
           banned_agents?: string[]
           banned_maps?: string[]
           created_at?: string
           creator?: string
           defenders?: string[]
           defenders_limit?: number
-          game_mode?: string
+          defenders_ready?: string[]
+          game_mode?: Database["public"]["Enums"]["game_mods"]
           invite_code?: string
           observers?: string[]
-          voting_time?: number
+          votes?: Json
+          voting_side?: Database["public"]["Enums"]["voting_sides"]
+          voting_time?: Database["public"]["Enums"]["voting_times"]
         }
         Relationships: []
       }
@@ -71,7 +83,15 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      game_mods:
+        | "swiftplay"
+        | "standard"
+        | "deathmatch"
+        | "escalation"
+        | "team_deathmatch"
+        | "spike_rush"
+      voting_sides: "attachers" | "defenders"
+      voting_times: "5" | "10" | "15" | "20" | "30"
     }
     CompositeTypes: {
       [_ in never]: never

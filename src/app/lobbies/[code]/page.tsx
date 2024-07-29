@@ -30,7 +30,7 @@ export default function LobbyPage({ params }: LobbyPageProps) {
       setIsLoading(true)
 
       await supabase
-        .from('Lobbies')
+        .from('lobbies')
         .select('*')
         .eq('invite_code', params.code)
         .single()
@@ -38,7 +38,8 @@ export default function LobbyPage({ params }: LobbyPageProps) {
           setIsLoading(false)
 
           if (error) {
-            console.error('Error fetching lobby:', error)
+            console.error(error.message)
+            return
           } else {
             setLobby(data)
           }
@@ -48,10 +49,9 @@ export default function LobbyPage({ params }: LobbyPageProps) {
     fetchLobby()
 
     const subscription = supabase
-      .channel('Lobbies')
-      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'Lobbies' }, (payload) => {
-        setLobby(payload.new as Database['public']['Tables']['Lobbies']['Row'])
-        console.log(payload)
+      .channel('lobbies')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'lobbies' }, (payload) => {
+        setLobby(payload.new as Database['public']['Tables']['lobbies']['Row'])
       })
       .subscribe()
 
@@ -75,6 +75,7 @@ export default function LobbyPage({ params }: LobbyPageProps) {
                       isReady={index + 1 <= lobby.attachers.length}
                       borderColor="#8d3342"
                       shadowColor="#ad8483"
+                      key={index}
                     />
                   ))}
                 </div>
@@ -89,6 +90,7 @@ export default function LobbyPage({ params }: LobbyPageProps) {
                       isReady={index + 1 <= lobby.defenders.length}
                       borderColor="#3b7979"
                       shadowColor="#397773"
+                      key={index}
                     />
                   ))}
                 </div>

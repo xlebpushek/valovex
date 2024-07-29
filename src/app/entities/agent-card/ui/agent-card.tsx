@@ -17,14 +17,10 @@ export function AgentCardEntity({ name, role, description, image }: AgentCardPro
           alt={name}
           width={100}
           height={100}
+          priority
           className="h-full w-full scale-[120%] rounded-t-lg object-cover"
         />
       </div>
-      {/* <div className="p-4">
-        <h2 className="text-xl font-semibold">{name}</h2>
-        <p className="text-sm text-gray-600">{role}</p>
-        <p className="mt-2 text-sm text-gray-800">{description}</p>
-      </div> */}
       <span className="absolute left-0 top-0 h-[2px] w-[2px] bg-white/50" />
       <span className="absolute right-0 top-0 h-[2px] w-[2px] bg-white/50" />
       <span className="absolute bottom-0 right-0 h-[2px] w-[2px] bg-white/50" />

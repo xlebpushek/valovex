@@ -49,9 +49,15 @@ export function PlayersEntity() {
       if (lobby && auth.user && lobby.creator === auth.user.id) {
         const [attachersLimit, defendersLimit] = players.split(':').map(Number)
         await supabase
-          .from('Lobbies')
+          .from('lobbies')
           .update({ attachers_limit: attachersLimit, defenders_limit: defendersLimit })
           .eq('invite_code', lobby.invite_code)
+          .then(({ error }) => {
+            if (error) {
+              console.error(error.message)
+              return
+            }
+          })
       }
     },
     [lobby, auth.user],

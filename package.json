@@ -1,6 +1,6 @@
 {
   "name": "valovex",
-  "description": "A web application for banning cards and characters in custom matches for the VALORANT game",
+  "description": "A web application for banning maps and agents in custom matches for the VALORANT game",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -21,6 +21,7 @@
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "supabase": "^1.187.8",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {

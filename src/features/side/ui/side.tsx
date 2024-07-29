@@ -7,9 +7,9 @@ import { useUnit } from 'effector-react'
 import { useCallback, useEffect, useState } from 'react'
 
 const sides = [
-  { code: 'attachers', label: 'Attachers' },
-  { code: 'defenders', label: 'Defenders' },
-  { code: 'observers', label: 'Observers' },
+  { value: 'attachers', label: 'Attachers' },
+  { value: 'defenders', label: 'Defenders' },
+  { value: 'observers', label: 'Observers' },
 ]
 
 const supabase = createClient()
@@ -36,7 +36,7 @@ export function SideFeature() {
       if (auth.user && lobby) {
         await supabase
           .rpc('append_to_array', {
-            table_name: 'Lobbies',
+            table_name: 'lobbies',
             column_name: columnName,
             value: auth.user.id,
             condition_column: 'invite_code',
@@ -55,11 +55,11 @@ export function SideFeature() {
   return (
     isOpenSideModal && (
       <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center gap-5 bg-black/80 backdrop-blur-sm max-md:flex-col">
-        {sides.map((side) => (
+        {sides.map((side, index) => (
           <button
-            key={side.code}
             className="border border-white px-8 py-2 font-medium uppercase transition-colors duration-500 hover:bg-rose-700"
-            onClick={() => handleSelectSide(side.code)}
+            onClick={() => handleSelectSide(side.value)}
+            key={index}
           >
             {side.label}
           </button>
