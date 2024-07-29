@@ -31,7 +31,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
       suppressHydrationWarning
     >
       <body className="relative h-full w-full tracking-wide">
-        <Image src={valorantBackground} alt="v" className="absolute left-0 top-0 -z-50 h-full w-full object-cover" />
+        <Image
+          src={valorantBackground}
+          alt="Valorant background image"
+          className="absolute left-0 top-0 -z-50 h-full w-full object-cover"
+        />
         <div className="absolute left-0 top-0 -z-40 h-full w-full bg-black/30" />
         <RootProvider>{children}</RootProvider>
       </body>

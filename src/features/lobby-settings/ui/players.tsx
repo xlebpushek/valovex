@@ -36,6 +36,8 @@ const players = [
   { value: '5:4', label: '5:4' },
 ]
 
+
+
 const supabase = createClient()
 
 export function PlayersEntity() {

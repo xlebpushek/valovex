@@ -1,6 +1,8 @@
 'use client'
 
+import { PlayerReadyEntity } from '@/app/entities/player-ready'
 import { $lobby, setLobby } from '@/app/lobbies/[code]/model'
+import { AgentsWidget } from '@/app/widgets/agents'
 import { GameModeEntity, PlayersEntity, TimerEntity } from '@/features/lobby-settings'
 import { SideFeature } from '@/features/side'
 import { createClient } from '@/shared/api/supabase/client'
@@ -59,25 +61,46 @@ export default function LobbyPage({ params }: LobbyPageProps) {
   }, [params.code])
 
   return (
-    <>
-      {auth.user && (
+    auth.user && (
+      <>
         <section className="flex h-full w-full items-center justify-center p-12">
           {isLoading ? (
             <PuffLoader />
           ) : lobby ? (
-            <div className="flex h-full w-full justify-center">
-              <div className="flex h-min w-full justify-center gap-x-5">
-                <PlayersEntity />
-                <GameModeEntity />
-                <TimerEntity />
+            <div className="flex h-full w-full flex-col items-center justify-between">
+              <div className="flex w-full justify-between">
+                <div className="flex flex-col gap-y-3">
+                  {Array.from({ length: lobby.attachers_limit }).map((_, index) => (
+                    <PlayerReadyEntity
+                      isReady={index + 1 <= lobby.attachers.length}
+                      borderColor="#8d3342"
+                      shadowColor="#ad8483"
+                    />
+                  ))}
+                </div>
+                <div className="flex h-min w-full justify-center gap-x-5">
+                  <PlayersEntity />
+                  <GameModeEntity />
+                  <TimerEntity />
+                </div>
+                <div className="flex flex-col gap-y-3">
+                  {Array.from({ length: lobby.defenders_limit }).map((_, index) => (
+                    <PlayerReadyEntity
+                      isReady={index + 1 <= lobby.defenders.length}
+                      borderColor="#3b7979"
+                      shadowColor="#397773"
+                    />
+                  ))}
+                </div>
               </div>
+              <AgentsWidget />
             </div>
           ) : (
             <h1>This lobby is not yet</h1>
           )}
         </section>
-      )}
-      <SideFeature />
-    </>
+        <SideFeature />
+      </>
+    )
   )
 }
