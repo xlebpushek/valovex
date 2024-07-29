@@ -17,7 +17,7 @@ const gameMods = [
 
 const supabase = createClient()
 
-export function GameModeEntity() {
+export function GameModeSelectEntity() {
   const lobby = useUnit($lobby)
   const auth = useAuth()
 

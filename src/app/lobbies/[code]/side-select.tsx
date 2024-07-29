@@ -3,6 +3,7 @@
 import { $lobby } from '@/app/lobbies/[code]/model'
 import { createClient } from '@/shared/api/supabase/client'
 import { useAuth } from '@/shared/lib/user/hook'
+import Button from '@/shared/ui/button'
 import { useUnit } from 'effector-react'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -14,7 +15,7 @@ const sides = [
 
 const supabase = createClient()
 
-export function SideFeature() {
+export function SideSelectFeature() {
   const lobby = useUnit($lobby)
   const auth = useAuth()
   const [isOpenSideModal, setIsOpenSideModal] = useState(false)
@@ -43,7 +44,9 @@ export function SideFeature() {
             condition_value: lobby.invite_code,
           })
           .then(({ error }) => {
-            if (!error) {
+            if (error) {
+              console.error(error.message)
+            } else {
               setIsOpenSideModal(false)
             }
           })
@@ -56,13 +59,9 @@ export function SideFeature() {
     isOpenSideModal && (
       <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center gap-5 bg-black/80 backdrop-blur-sm max-md:flex-col">
         {sides.map((side, index) => (
-          <button
-            className="border border-white px-8 py-2 font-medium uppercase transition-colors duration-500 hover:bg-rose-700"
-            onClick={() => handleSelectSide(side.value)}
-            key={index}
-          >
+          <Button variant="outline" onClick={() => handleSelectSide(side.value)} key={index}>
             {side.label}
-          </button>
+          </Button>
         ))}
       </div>
     )

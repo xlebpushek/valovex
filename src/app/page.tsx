@@ -58,7 +58,7 @@ export default function RootPage() {
         <div className="flex items-center justify-center gap-x-5">
           <Button onClick={createLobby}>Create</Button>
           <h3 className="font-medium">or</h3>
-          <Button variant="hollow" onClick={handleICodeModal}>
+          <Button variant="outline" onClick={handleICodeModal}>
             Connect
           </Button>
         </div>

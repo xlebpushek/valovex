@@ -36,11 +36,9 @@ const players = [
   { value: '5:4', label: '5:4' },
 ]
 
-
-
 const supabase = createClient()
 
-export function PlayersEntity() {
+export function PlayersSelectEntity() {
   const lobby = useUnit($lobby)
   const auth = useAuth()
 

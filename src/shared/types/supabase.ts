@@ -13,17 +13,16 @@ export type Database = {
         Row: {
           attachers: string[]
           attachers_limit: number
-          attachers_ready: string[]
           banned_agents: string[]
           banned_maps: string[]
           created_at: string
           creator: string
           defenders: string[]
           defenders_limit: number
-          defenders_ready: string[]
           game_mode: Database["public"]["Enums"]["game_mods"]
           invite_code: string
           observers: string[]
+          users_ready: string[]
           votes: Json
           voting_side: Database["public"]["Enums"]["voting_sides"]
           voting_time: Database["public"]["Enums"]["voting_times"]
@@ -31,17 +30,16 @@ export type Database = {
         Insert: {
           attachers?: string[]
           attachers_limit?: number
-          attachers_ready?: string[]
           banned_agents?: string[]
           banned_maps?: string[]
           created_at?: string
           creator: string
           defenders?: string[]
           defenders_limit?: number
-          defenders_ready?: string[]
           game_mode?: Database["public"]["Enums"]["game_mods"]
           invite_code: string
           observers?: string[]
+          users_ready?: string[]
           votes?: Json
           voting_side: Database["public"]["Enums"]["voting_sides"]
           voting_time?: Database["public"]["Enums"]["voting_times"]
@@ -49,17 +47,16 @@ export type Database = {
         Update: {
           attachers?: string[]
           attachers_limit?: number
-          attachers_ready?: string[]
           banned_agents?: string[]
           banned_maps?: string[]
           created_at?: string
           creator?: string
           defenders?: string[]
           defenders_limit?: number
-          defenders_ready?: string[]
           game_mode?: Database["public"]["Enums"]["game_mods"]
           invite_code?: string
           observers?: string[]
+          users_ready?: string[]
           votes?: Json
           voting_side?: Database["public"]["Enums"]["voting_sides"]
           voting_time?: Database["public"]["Enums"]["voting_times"]

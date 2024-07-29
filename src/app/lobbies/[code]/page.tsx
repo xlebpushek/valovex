@@ -1,16 +1,17 @@
 'use client'
 
-import { PlayerReadyEntity } from '@/app/entities/player-ready'
-import { $lobby, setLobby } from '@/app/lobbies/[code]/model'
-import { AgentsWidget } from '@/app/widgets/agents'
-import { GameModeEntity, PlayersEntity, TimerEntity } from '@/features/lobby-settings'
-import { SideFeature } from '@/features/side'
 import { createClient } from '@/shared/api/supabase/client'
 import { useAuth } from '@/shared/lib/user/hook'
 import { Database } from '@/shared/types/supabase'
 import { PuffLoader } from '@/shared/ui/puff-loader'
 import { useUnit } from 'effector-react'
 import { useEffect, useState } from 'react'
+import { AgentsWidget } from './agents'
+import { LobbySettingsWidget } from './lobby-settings'
+import { $lobby, setLobby } from './model'
+import { PlayerReadyButtonFeature } from './player-ready-button'
+import { AttachersPlayersReadyWidget, DefendersPlayersReadyWidget } from './players-ready'
+import { SideSelectFeature } from './side-select'
 
 interface LobbyPageProps {
   params: {
@@ -69,39 +70,20 @@ export default function LobbyPage({ params }: LobbyPageProps) {
           ) : lobby ? (
             <div className="flex h-full w-full flex-col items-center justify-between">
               <div className="flex w-full justify-between">
-                <div className="flex flex-col gap-y-3">
-                  {Array.from({ length: lobby.attachers_limit }).map((_, index) => (
-                    <PlayerReadyEntity
-                      isReady={index + 1 <= lobby.attachers.length}
-                      borderColor="#8d3342"
-                      shadowColor="#ad8483"
-                      key={index}
-                    />
-                  ))}
-                </div>
-                <div className="flex h-min w-full justify-center gap-x-5">
-                  <PlayersEntity />
-                  <GameModeEntity />
-                  <TimerEntity />
-                </div>
-                <div className="flex flex-col gap-y-3">
-                  {Array.from({ length: lobby.defenders_limit }).map((_, index) => (
-                    <PlayerReadyEntity
-                      isReady={index + 1 <= lobby.defenders.length}
-                      borderColor="#3b7979"
-                      shadowColor="#397773"
-                      key={index}
-                    />
-                  ))}
-                </div>
+                <AttachersPlayersReadyWidget />
+                <LobbySettingsWidget />
+                <DefendersPlayersReadyWidget />
               </div>
-              <AgentsWidget />
+              <div className="flex flex-col items-center gap-y-6">
+                <PlayerReadyButtonFeature />
+                <AgentsWidget />
+              </div>
             </div>
           ) : (
-            <h1>This lobby is not yet</h1>
+            <h1 className="text-xl font-bold">There is no such lobby</h1>
           )}
         </section>
-        <SideFeature />
+        <SideSelectFeature />
       </>
     )
   )

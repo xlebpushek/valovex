@@ -18,7 +18,7 @@ const times = [
 
 const supabase = createClient()
 
-export function TimerEntity() {
+export function TimerSelectEntity() {
   const lobby = useUnit($lobby)
   const auth = useAuth()
 
